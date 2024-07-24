@@ -1,0 +1,112 @@
+//Escenario Weather Forecast
+
+Random random = new Random();           //Variable que genera valores aleatorios
+int min;                            //Variable de la temperatura minima
+while (true)            //Forzamos a que entre al bucle sin utilizar una bandera/variable
+{
+    //item numero 1
+    Console.WriteLine("Bienvenido al programa Weather Forecast\n");
+    Console.WriteLine("Ingrese el valor de la temperatura actual, si desea salir ingrese NO\n");
+    var input = Console.ReadLine();
+    if (input != "")                            //Verificamos que se escribio en la variable algun valor
+    {
+        Console.Clear();
+        if (input.ToUpper() != "NO")            //Utilizamos la funcion ToUpper para pasar todos los caracteres a mayusculas facilitando la salida
+        {
+            if (int.TryParse(input, out int casteo))
+            {
+                if ((casteo > -21) && (casteo < 51))                //Controles extras para verificar que es un valor basado normalmente en la realidad
+                {
+                    //item numero 2
+                    switch (casteo)
+                    {
+                        case (< 0):
+                            Console.WriteLine("Hace mucho frío afuera, asegúrate de abrigarte bien");
+                            break;
+                        case (< 21):
+                            Console.WriteLine("El clima esta fresco, una chaqueta ligera seria perfecta");
+                            break;
+                        default:
+                            Console.WriteLine("Hace calor afuera, no necesitas una chaqueta");
+                            break;
+                    }
+                    Console.ReadKey();
+                  
+                    while (true)
+                    {
+                        //item numero 3
+                        Console.Clear();
+                        Console.WriteLine("Desea conocer el pronostico para los proximos 5 dias? ESCRIBA 'SI' SI LO DESEA, 'NO' SI DESEA SALIR\n");
+                        input = Console.ReadLine();
+                        if ((input.ToUpper() != "NO") && (input.ToUpper() != "SI"))
+                        {
+                            Console.WriteLine("Ingrese un valor valido");
+                            Console.ReadKey();
+                        }
+                        else if (input.ToUpper() == "NO")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            //item numero 4
+                            Console.Clear();
+                            for (int i = 0;i < 5; i++)
+                            {
+                                min = random.Next(-20, 40);
+                                Console.WriteLine("El dia: " + (i+1) + " tendra una minima de: " + min + " grados y una maxima de: " + (random.Next(min, (min + 10))) + " grados\n");
+                                                                       //el valor maximo tiene un rango de 10 grados mas que la minima para asemejarse a la realidad
+                            }
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
+
+                    //item numero 5
+                    while (true)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Desea consultar otro pronostico? ESCRIBA 'SI' SI LO DESEA, 'NO' SI DESEA SALIR\\n\"");
+                        input = Console.ReadLine();
+                        if ((input.ToUpper() != "NO") && (input.ToUpper() != "SI"))
+                        {
+                            Console.WriteLine("Escriba algun valor valido");
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if (input.ToUpper() == "NO")
+                    {
+                        Console.Clear();
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ingrese valores de temperatura dentro del rango de la realidad");
+                    Console.ReadKey();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Debe ingresar un numero o para salir la palabra NO");
+                Console.ReadKey();
+            }
+        }
+        else
+        {
+            break;          //Una manera de romper el bucle
+        }
+    }
+    else
+    {
+        Console.WriteLine("Ingrese un valor");
+        Console.ReadKey();
+    }
+    Console.Clear();
+}
+Console.WriteLine("Gracias por utilizar Weather Forecast, hasta luego");
+Console.ReadKey();
